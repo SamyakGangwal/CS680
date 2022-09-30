@@ -4,48 +4,57 @@
 
      on a shell. 
 -->
-<project name="PrimeGenerator" basedir="."  default="clean">	
+<project name="PrimeGenerator" basedir="." default="clean">
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
-	
+
 	<path id="classpath">
 		<pathelement location="bin" />
 		<pathelement location="src" />
-		<pathelement location="lib/junit-platform-console-standalone-1.9.1.jar" />
+		<pathelement location="lib/junit-jupiter-5.9.1.jar" />	
+		<pathelement location="lib/apiguardian-api-1.1.2.jar" />	
+		<pathelement location="lib/junit-jupiter-api-5.9.1.jar" />
+		<pathelement location="lib/junit-jupiter-engine-5.9.1.jar" />
+		<pathelement location="lib/junit-jupiter-migrationsupport-5.9.1.jar" />
+		<pathelement location="lib/junit-jupiter-params-5.9.1.jar" />
+		<pathelement location="lib/junit-platform-commons-1.9.1.jar" />
+		<pathelement location="lib/junit-platform-engine-1.9.1.jar" />
+		<pathelement location="lib/junit-platform-launcher-1.9.1.jar" />
+		<pathelement location="lib/opentest4j-1.2.0.jar" />
 	</path>
-	
+
 	<target name="init">
-		<mkdir dir="${bin}"/>
+		<mkdir dir="${bin}" />
 	</target>
-	
+
 	<target name="compile" depends="init">
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
-			<classpath refid="classpath"/>
-			<include name="edu/umb/cs680/hw01/PrimeGenerator.java"/>
-			<include name="edu/umb/cs680/hw01/PrimeGeneratorTest.java"/>
+			<classpath refid="classpath" />
+			<include name="edu/umb/cs680/hw01/PrimeGenerator.java" />
+			<include name="edu/umb/cs680/hw01/PrimeGeneratorTest.java" />
 			<!-- include name="edu/umb/cs680/hw01/*.java"/-->
 		</javac>
 	</target>
 
-	<target name="run" depends="compile">
-		<java classname="edu.umb.cs680.hw01.PrimeGenerator"
-				classpathref="classpath"  
-				fork="true"/>
-	</target>
-	
-	<target name="clean" depends="run">
-		<delete includeemptydirs="true">
-			<fileset dir="${bin}/edu/umb/cs680/hw01" includes="**/*"/>
-		</delete>
+	<target name="test" depends="compile">
+		<junitlauncher printSummary="yes" haltOnFailure="yes" failureProperty="yes">
+			<classpath refid="classpath" />
+			<testclasses outputdir="${src}">
+				<fileset dir="${src}" includes="**/*Test*.java" />
+				<listener type="legacy-brief" sendSysOut="true" sendSysErr="true"/>
+				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true"/>
+				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true" />
+			</testclasses>
+		</junitlauncher>
 	</target>
 
-	<target name="test" depends="compile">
-		<junit printsummary="yes" haltonerror="yes" logfailedtests="yes">
-			<classpath refid="classpath"/>
-			<formatter type="plain" usefile="false"/>
-			<batchtest>
-				<fileset dir="${src}" includes="**/*Test*.java" />
-			</batchtest>
-		</junit>
+	<target name="run" depends="test">
+		<java classname="edu.umb.cs680.hw01.PrimeGenerator" classpathref="classpath" fork="true" />
+	</target>
+
+	<target name="clean" depends="run">
+		<delete includeemptydirs="true">
+			<fileset dir="${bin}" includes="**/*" />
+		</delete>
 	</target>
 </project>

@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PrimeGeneratorTest {
-	// TODO: Add tests for Primegenerator constructor
- 
+	// TODO: Add tests fail for Primegenerator constructor
+
 	@Test
 	public void isEvenTrue() {
 		PrimeGenerator evenNumber = new PrimeGenerator(1, 1000);
@@ -16,6 +16,18 @@ public class PrimeGeneratorTest {
 		boolean actual = evenNumber.isEven(4);
 
 		assertTrue(actual);
+	}
+
+	@Test
+	public void PrimeGeneratorObjectCreationSuccess() {
+		PrimeGenerator primeObj = new PrimeGenerator(1, 10);
+
+		long from = 1;
+		long to = 10;
+
+		assertEquals(from, primeObj.from);
+
+		assertEquals(to, primeObj.to);
 	}
 
 	@Test
@@ -52,7 +64,7 @@ public class PrimeGeneratorTest {
 		primeNumbers.generatePrimes();
 
 		LinkedList<Long> actualPrimes = primeNumbers.getPrimes();
-		
+
 		LinkedList<Long> expectedPrimes = new LinkedList<>();
 
 		expectedPrimes.add((long) 2);
@@ -80,7 +92,7 @@ public class PrimeGeneratorTest {
 		PrimeGenerator primeNumbers = new PrimeGenerator(1, 12);
 
 		primeNumbers.generatePrimes();
-		
+
 		LinkedList<Long> expectedPrimes = new LinkedList<>();
 
 		expectedPrimes.add((long) 2);
@@ -91,6 +103,5 @@ public class PrimeGeneratorTest {
 
 		assertEquals(expectedPrimes, primeNumbers.primes);
 	}
-
 
 }

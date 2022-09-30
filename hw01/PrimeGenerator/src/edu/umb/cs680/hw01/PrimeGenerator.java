@@ -50,7 +50,7 @@ public class PrimeGenerator {
 		while(it.hasNext()) {
 			System.out.print(it.next() + ", ");
 		}
-		System.out.println("\n" + gen.getPrimes().size() + " primes are found.");								
+		System.out.println("\n" + gen.getPrimes().size() + " primes are found.");
 	}
 }
 
