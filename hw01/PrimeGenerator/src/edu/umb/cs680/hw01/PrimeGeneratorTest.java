@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.Test;
 
 public class PrimeGeneratorTest {
-	// TODO: Add tests fail for Primegenerator constructor
 
 	@Test
 	public void isEvenTrue() {
