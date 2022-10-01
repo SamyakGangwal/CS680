@@ -19,7 +19,7 @@ public class PrimeGeneratorTest {
 	}
 
 	@Test
-	public void PrimeGeneratorObjectCreationSuccess() {
+	public void primeGeneratorObjectCreationSuccess() {
 		PrimeGenerator primeObj = new PrimeGenerator(1, 10);
 
 		long from = 1;
@@ -28,6 +28,19 @@ public class PrimeGeneratorTest {
 		assertEquals(from, primeObj.from);
 
 		assertEquals(to, primeObj.to);
+	}
+
+	@Test
+	public void primeGeneratorObjectCreationFailure() {
+		long from = 0;
+		long to = 10;
+
+		try {
+			PrimeGenerator primeObj = new PrimeGenerator(from, to);
+			fail("Incorrect input values from: " + from + " to=" + to);
+		} catch (RuntimeException ex) {
+			assertEquals("Wrong input values: from=" + from + " to=" + to, ex.getMessage());
+		}
 	}
 
 	@Test

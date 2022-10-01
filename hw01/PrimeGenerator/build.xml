@@ -40,7 +40,9 @@
 		<junitlauncher printSummary="yes" haltOnFailure="yes" failureProperty="yes">
 			<classpath refid="classpath" />
 			<testclasses outputdir="${src}">
-				<fileset dir="${src}" includes="**/*Test*.java" />
+				<fileset dir="bin">
+					<include name="**/*Test.class" />
+				</fileset>
 				<listener type="legacy-brief" sendSysOut="true" sendSysErr="true"/>
 				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true"/>
 				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true" />

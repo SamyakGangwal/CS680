@@ -2,3 +2,6 @@
 /lib/*
 
 .vscode
+
+*Test.txt
+*Test.xml
