@@ -8,6 +8,32 @@ import org.junit.jupiter.api.Test;
 
 public class PrimeGeneratorTest {
 
+	
+	@Test
+	public void primeGeneratorObjectCreationSuccess() {
+		PrimeGenerator primeObj = new PrimeGenerator(1, 10);
+		
+		long from = 1;
+		long to = 10;
+		
+		assertEquals(from, primeObj.from);
+		
+		assertEquals(to, primeObj.to);
+	}
+	
+	@Test
+	public void primeGeneratorObjectCreationFailure() {
+		long from = 0;
+		long to = 10;
+		
+		try {
+			PrimeGenerator primeObj = new PrimeGenerator(from, to);
+			fail("Incorrect input values from: " + from + " to=" + to);
+		} catch (RuntimeException ex) {
+			assertEquals("Wrong input values: from=" + from + " to=" + to, ex.getMessage());
+		}
+	}
+
 	@Test
 	public void isEvenTrue() {
 		PrimeGenerator evenNumber = new PrimeGenerator(1, 1000);
@@ -18,29 +44,14 @@ public class PrimeGeneratorTest {
 	}
 
 	@Test
-	public void primeGeneratorObjectCreationSuccess() {
-		PrimeGenerator primeObj = new PrimeGenerator(1, 10);
+	public void isEvenNegative() {
+		PrimeGenerator evenNumber = new PrimeGenerator(1, 1000);
 
-		long from = 1;
-		long to = 10;
+		boolean actual = evenNumber.isEven(-4);
 
-		assertEquals(from, primeObj.from);
-
-		assertEquals(to, primeObj.to);
+		assertTrue(actual);
 	}
 
-	@Test
-	public void primeGeneratorObjectCreationFailure() {
-		long from = 0;
-		long to = 10;
-
-		try {
-			PrimeGenerator primeObj = new PrimeGenerator(from, to);
-			fail("Incorrect input values from: " + from + " to=" + to);
-		} catch (RuntimeException ex) {
-			assertEquals("Wrong input values: from=" + from + " to=" + to, ex.getMessage());
-		}
-	}
 
 	@Test
 	public void isEvenFalse() {
@@ -77,15 +88,9 @@ public class PrimeGeneratorTest {
 
 		LinkedList<Long> actualPrimes = primeNumbers.getPrimes();
 
-		LinkedList<Long> expectedPrimes = new LinkedList<>();
+		Long[] expectedPrimes = {2L, 3L, 5L, 7L, 11L};
 
-		expectedPrimes.add((long) 2);
-		expectedPrimes.add((long) 3);
-		expectedPrimes.add((long) 5);
-		expectedPrimes.add((long) 7);
-		expectedPrimes.add((long) 11);
-
-		assertEquals(expectedPrimes, actualPrimes);
+		assertArrayEquals(expectedPrimes, actualPrimes.toArray());
 	}
 
 	@Test
@@ -105,15 +110,9 @@ public class PrimeGeneratorTest {
 
 		primeNumbers.generatePrimes();
 
-		LinkedList<Long> expectedPrimes = new LinkedList<>();
+		Long[] expectedPrimes = {2L, 3L, 5L, 7L, 11L};
 
-		expectedPrimes.add((long) 2);
-		expectedPrimes.add((long) 3);
-		expectedPrimes.add((long) 5);
-		expectedPrimes.add((long) 7);
-		expectedPrimes.add((long) 11);
-
-		assertEquals(expectedPrimes, primeNumbers.primes);
+		assertArrayEquals(expectedPrimes, primeNumbers.primes.toArray());
 	}
 
 }
