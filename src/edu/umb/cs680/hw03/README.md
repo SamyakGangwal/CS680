@@ -1,4 +1,4 @@
-Homework 02
+Homework 03
 
 Tests for PrimeGenerator class with test directory
 
