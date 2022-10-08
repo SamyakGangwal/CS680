@@ -1,7 +1,11 @@
-/bin/*
-/lib/*
+/bin
+/lib
 
 .vscode
 
 *Test.txt
 *Test.xml
+
+test/bin
+
+test/reports
