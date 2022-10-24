@@ -2,6 +2,7 @@ package edu.umb.cs680.hw03;
 
 public class Singleton {
 	private int number;
+
 	private Singleton(int num) {
 		this.number = num;
 	};
@@ -14,7 +15,7 @@ public class Singleton {
 		}
 		return instance;
 	}
-	
+
 	public int getNumber() {
 		return this.number;
 	}
