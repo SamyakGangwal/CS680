@@ -2,108 +2,79 @@ package edu.umb.cs680.hw05;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SecurityContextTest {
-	@Test
-	public void loginTrue() {
-		String firstName = "Alan";
-		String lastName = "Turing";
+	private User userinfo;
+	private SecurityContext ctx;
+	private EncryptedString pwd;
 
-		EncryptedString pwd = new EncryptedString("pwd");
-
-		User userObject = new User(firstName, lastName);
-
-		SecurityContext ctx = new SecurityContext(userObject);
-
-		try {
-			ctx.login(pwd);
-			assertTrue(ctx.getState() instanceof LoggedIn);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	@BeforeEach
+	void setUp() {
+		this.userinfo = new User("Alan", "Turing");
+		this.pwd = new EncryptedString("pwd");
+		this.ctx = new SecurityContext(this.userinfo);
 	}
 
 	@Test
-	public void loginFalse() {
-		String firstName = "Alan";
-		String lastName = "Turing";
+	public void loginTrue() throws Exception {
 
-		EncryptedString pwd = new EncryptedString("pwd");
-
-		User userObject = new User(firstName, lastName);
-
-		SecurityContext ctx = new SecurityContext(userObject);
-
-		try {
-			ctx.logout();
-			assertFalse(ctx.getState() instanceof LoggedIn);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		ctx.login(pwd);
+		assertTrue(ctx.getState() instanceof LoggedIn);
 
 	}
 
 	@Test
-	public void loginLogoutLogin() {
-		String firstName = "Alan";
-		String lastName = "Turing";
+	public void loginFalse() throws Exception {
 
-		EncryptedString pwd = new EncryptedString("pwd");
+		ctx.logout();
+		assertFalse(ctx.getState() instanceof LoggedIn);
 
-		User userObject = new User(firstName, lastName);
-
-		SecurityContext ctx = new SecurityContext(userObject);
-
-		try {
-			ctx.login(pwd);
-			assertTrue(ctx.getState() instanceof LoggedIn);
-			ctx.logout();
-			assertFalse(ctx.getState() instanceof LoggedIn);
-			ctx.login(pwd);
-			assertTrue(ctx.getState() instanceof LoggedIn);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 	}
 
 	@Test
-	public void multipleUserSessions() {
-		String firstName = "Alan";
-		String lastName = "Turing";
+	public void loginLogoutLogin() throws Exception {
 
-		EncryptedString pwd = new EncryptedString("pwd");
+		ctx.login(pwd);
+		assertTrue(ctx.getState() instanceof LoggedIn);
+		ctx.logout();
+		assertFalse(ctx.getState() instanceof LoggedIn);
+		ctx.login(pwd);
+		assertTrue(ctx.getState() instanceof LoggedIn);
 
-		User userObject = new User(firstName, lastName);
-		SecurityContext ctx = new SecurityContext(userObject);
+	}
 
-
-		String firstName1 = "Dennis";
-		String lastName1 = "Ritchie";
-
+	@Test
+	public void multipleUserSessions() throws Exception {
 		EncryptedString pwd1 = new EncryptedString("pwd");
 
-		User userObject1 = new User(firstName1, lastName1);
+		User userObject1 = new User("Dennis", "Ritchie");
 		SecurityContext ctx1 = new SecurityContext(userObject1);
 
-		try {
-			ctx.login(pwd);
-			assertTrue(ctx.getState() instanceof LoggedIn);
+		ctx.login(pwd);
+		assertTrue(ctx.getState() instanceof LoggedIn);
 
-			// Checking if user2 is logged out
-			assertTrue(ctx1.getState() instanceof LoggedOut);
+		// Checking if user2 is logged out
+		assertTrue(ctx1.getState() instanceof LoggedOut);
 
-			ctx1.login(pwd1);
-			assertTrue(ctx1.getState() instanceof LoggedIn);
+		ctx1.login(pwd1);
+		assertTrue(ctx1.getState() instanceof LoggedIn);
 
-			ctx1.logout();
-			assertTrue(ctx1.getState() instanceof LoggedOut);
-			assertTrue(ctx.getState() instanceof LoggedIn);
+		ctx1.logout();
+		assertTrue(ctx1.getState() instanceof LoggedOut);
+		assertTrue(ctx.getState() instanceof LoggedIn);
 
-			ctx.logout();
-			assertFalse(ctx.getState() instanceof LoggedIn);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		ctx.logout();
+		assertFalse(ctx.getState() instanceof LoggedIn);
 	}
+
+	@Test
+	public void checkActiveLoginSession() throws Exception {
+		ctx.login(pwd);
+
+		assertTrue(ctx.isActive());
+
+	}
+
 }
