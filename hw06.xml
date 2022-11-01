@@ -36,12 +36,12 @@
 	<target name="compile" depends="resolve">
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw06/*.java" />
+			<include name="edu/umb/cs680/hw06/*/*.java" />
 			<!-- include name="edu/umb/cs680/hw06/*.java"/-->
 		</javac>
 		<javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw06/*.java" />
+			<include name="edu/umb/cs680/hw06/*/*.java" />
 		</javac>
 	</target>
 
@@ -50,7 +50,7 @@
 			<classpath refid="classpath" />
 			<testclasses outputdir="test/reports">
 				<fileset dir="${test.bin}">
-					<include name="edu/umb/cs680/hw06/*Test.class" />
+					<include name="edu/umb/cs680/hw06/*/*Test.class" />
 				</fileset>
 				<listener type="legacy-brief" sendSysOut="true" sendSysErr="true" />
 				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true" />

@@ -16,13 +16,6 @@ public class PrintJobExecuterTest {
 	private SecurityContext ctx;
 	private EncryptedString pwd;
 
-	@BeforeEach
-	void setup() {
-		this.userinfo = new User("Alan", "Turing");
-		this.pwd = new EncryptedString("pwd");
-		this.ctx = new SecurityContext(this.userinfo);
-	}
-
 	@Test
 	public void printInModelXYZ() {
 		String expected = "TEST";
@@ -30,7 +23,7 @@ public class PrintJobExecuterTest {
 
 		PrintJobExecutor xyz = new PrintJobExecutor();
 
-		String actual = xyz.execute(job, pwd, ctx);
+		String actual = xyz.execute(job, null, null);
 
 		assertEquals(expected, actual);
 	}
@@ -46,7 +39,7 @@ public class PrintJobExecuterTest {
 		for (int i = 0; i < expected.length; i++) {
 			PrintJobExecutor xyz = new PrintJobExecutor();
 
-			String actual = xyz.execute(job, pwd, ctx);
+			String actual = xyz.execute(job, null, null);
 
 			assertEquals(expected[i], actual);
 		}

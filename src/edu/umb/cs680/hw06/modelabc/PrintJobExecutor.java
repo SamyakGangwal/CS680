@@ -20,6 +20,7 @@ public class PrintJobExecutor extends edu.umb.cs680.hw06.printingframework.Print
 	@Override
 	protected void doPrint(PrintJob printObject, EncryptedString pwd, SecurityContext ctx) throws Exception {
 		doAuthentication(pwd, ctx);
+		System.out.println(printObject.startPrintJob());
 		
 	}
 
