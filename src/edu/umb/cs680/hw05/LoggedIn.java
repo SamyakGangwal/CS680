@@ -18,10 +18,10 @@ class LoggedIn implements State {
 	}
 
 	@Override
-	public void login(EncryptedString pwd, SecurityContext ctx) throws AuthenticationException {
+	public void login(EncryptedString pwd, SecurityContext ctx, User user) throws AuthenticationException {
 		if (!ctx.isActive()) {
 			ctx.logout();
-			ctx.login(pwd);
+			ctx.login(pwd, user);
 		}
 	}
 

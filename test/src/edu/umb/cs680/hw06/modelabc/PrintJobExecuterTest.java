@@ -1,6 +1,8 @@
 package edu.umb.cs680.hw06.modelabc;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +19,8 @@ public class PrintJobExecuterTest {
 
 	@BeforeEach
 	void setup() {
-		this.userinfo = new User("Alan", "Turing");
 		this.pwd = new EncryptedString("pwd");
+		this.userinfo = new User("Alan", "Turing", this.pwd);
 		this.ctx = new SecurityContext(this.userinfo);
 	}
 
@@ -29,9 +31,7 @@ public class PrintJobExecuterTest {
 
 		PrintJobExecutor xyz = new PrintJobExecutor();
 
-		String actual = xyz.execute(job, pwd, ctx);
-
-		assertEquals(expected, actual);
+		assertTrue(xyz.execute(job, pwd, ctx, userinfo));
 	}
 
 	@Test
@@ -45,16 +45,14 @@ public class PrintJobExecuterTest {
 		for (int i = 0; i < expected.length; i++) {
 			PrintJobExecutor xyz = new PrintJobExecutor();
 
-			String actual = xyz.execute(job, pwd, ctx);
-
-			assertEquals(expected[i], actual);
+			assertTrue(xyz.execute(job, pwd, ctx, userinfo));
 		}
 	}
 
 	@Test
 	public void multiUserPrint() {
-		User userinfo1 = new User("Alan", "Turing");
 		EncryptedString pwd1 = new EncryptedString("pwd");
+		User userinfo1 = new User("Alan", "Turing", pwd1);
 		SecurityContext ctx1 = new SecurityContext(userinfo1);
 
 		String expected = "TEST";
@@ -66,12 +64,29 @@ public class PrintJobExecuterTest {
 
 		PrintJobExecutor abc = new PrintJobExecutor();
 
-		String actual = abc.execute(job, pwd, ctx);
+		assertTrue(abc.execute(job, pwd, ctx, userinfo));
 
-		String actual1 = abc.execute(job1, pwd1, ctx1);
+		assertTrue(abc.execute(job1, pwd1, ctx1, userinfo1));
+	}
 
-		assertEquals(expected1, actual1);
+	@Test
+	public void printWithoutLogin() {
+		String testPrint = "TEST";
+		PrintJob job = new PrintJob(testPrint);
 
-		assertEquals(expected, actual);
+		PrintJobExecutor abc = new PrintJobExecutor();
+
+		assertFalse(abc.execute(job, null, null, null));
+	}
+
+	@Test
+	public void printWithFalseAuth() {
+		EncryptedString pwd1 = new EncryptedString("pwd1");
+		String expected = "TEST";
+		PrintJob job = new PrintJob(expected);
+
+		PrintJobExecutor xyz = new PrintJobExecutor();
+
+		assertFalse(xyz.execute(job, pwd1, ctx, userinfo));
 	}
 }

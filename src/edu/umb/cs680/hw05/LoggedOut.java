@@ -19,8 +19,8 @@ public class LoggedOut implements State {
 	}
 
 	@Override
-	public void login(EncryptedString pwd, SecurityContext ctx) throws AuthenticationException {
-		if (Authenticator.authenticate(pwd)) {
+	public void login(EncryptedString pwd, SecurityContext ctx, User user) throws AuthenticationException {
+		if (Authenticator.authenticate(user,pwd)) {
 			ctx.changeState(LoggedIn.loggedInState());
 		} else {
 			throw new AuthenticationException("Invalid login");

@@ -13,10 +13,10 @@ public class Main {
 
 		PrintJobExecutor xyz = new PrintJobExecutor();
 
-		xyz.execute(job, null, null);
+		xyz.execute(job, null, null, null);
 
-		User userinfo = new User("Alan", "Turing");
 		EncryptedString pwd = new EncryptedString("pwd");
+		User userinfo = new User("Alan", "Turing", pwd);
 		SecurityContext ctx = new SecurityContext(userinfo);
 
 		String test1 = "TEST";
@@ -24,7 +24,7 @@ public class Main {
 
 		PrintJobExecutor abc = new PrintJobExecutor();
 
-		abc.execute(job1, pwd, ctx);
+		abc.execute(job1, pwd, ctx, userinfo);
 	}
 
 }

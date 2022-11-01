@@ -2,31 +2,31 @@ package edu.umb.cs680.hw06.printingframework;
 
 import edu.umb.cs680.hw05.EncryptedString;
 import edu.umb.cs680.hw05.SecurityContext;
+import edu.umb.cs680.hw05.User;
 
 abstract public class PrintJobExecutor {
 
 	protected PrintJobExecutor() {
 	}
 
-	public String execute(PrintJob job, EncryptedString pwd, SecurityContext ctx) {
-		String printJobString = job.getFirstPrintJob();
-		
+	public boolean execute(PrintJob job, EncryptedString pwd, SecurityContext ctx, User user) {
 		try {
-			doAuthentication(pwd, ctx);
+			doAuthentication(pwd, ctx, user);
 			doAccessControl();
-			doPrint(job, pwd, ctx);
+			doPrint(job, pwd, ctx, user);
 		} catch (Exception e) {
 			doErrorHandling(e);
+			return false;
 		}
 
-		return printJobString;
+		return true;
 	}
 
-	protected abstract void doAuthentication(EncryptedString pwd, SecurityContext ctx) throws Exception;
+	protected abstract void doAuthentication(EncryptedString pwd, SecurityContext ctx, User user) throws Exception;
 
 	protected abstract void doAccessControl();
 
-	protected abstract void doPrint(PrintJob printObject, EncryptedString pwd, SecurityContext ctx) throws Exception;
+	protected abstract void doPrint(PrintJob printObject, EncryptedString pwd, SecurityContext ctx, User user) throws Exception;
 
 	protected abstract void doErrorHandling(Exception e);
 }

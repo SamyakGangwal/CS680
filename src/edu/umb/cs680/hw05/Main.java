@@ -8,7 +8,7 @@ public class Main {
 
 		EncryptedString pwd = new EncryptedString("starwars");
 
-		User userObject = new User(firstName, lastName);
+		User userObject = new User(firstName, lastName, pwd);
 
 		SecurityContext ctx = new SecurityContext(userObject);
 
@@ -17,15 +17,15 @@ public class Main {
 
 		EncryptedString pwd1 = new EncryptedString("pwd");
 
-		User userObject1 = new User(firstName, lastName);
+		User userObject1 = new User(firstName, lastName, pwd);
 
 		SecurityContext ctx1 = new SecurityContext(userObject1);
 
 		try {
-			ctx.login(pwd);
+			ctx.login(pwd, userObject);
 			System.out.println(ctx.getState() instanceof LoggedIn);
 
-			ctx1.login(pwd);
+			ctx1.login(pwd, userObject1);
 			System.out.println(ctx1.getState() instanceof LoggedIn);
 
 			ctx1.logout();

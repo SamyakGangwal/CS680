@@ -12,15 +12,15 @@ public class SecurityContextTest {
 
 	@BeforeEach
 	void setUp() {
-		this.userinfo = new User("Alan", "Turing");
 		this.pwd = new EncryptedString("pwd");
+		this.userinfo = new User("Alan", "Turing", this.pwd);
 		this.ctx = new SecurityContext(this.userinfo);
 	}
 
 	@Test
 	public void loginTrue() throws Exception {
 
-		ctx.login(pwd);
+		ctx.login(pwd, userinfo);
 		assertTrue(ctx.getState() instanceof LoggedIn);
 
 	}
@@ -36,11 +36,11 @@ public class SecurityContextTest {
 	@Test
 	public void loginLogoutLogin() throws Exception {
 
-		ctx.login(pwd);
+		ctx.login(pwd, userinfo);
 		assertTrue(ctx.getState() instanceof LoggedIn);
 		ctx.logout();
 		assertFalse(ctx.getState() instanceof LoggedIn);
-		ctx.login(pwd);
+		ctx.login(pwd, userinfo);
 		assertTrue(ctx.getState() instanceof LoggedIn);
 
 	}
@@ -49,16 +49,16 @@ public class SecurityContextTest {
 	public void multipleUserSessions() throws Exception {
 		EncryptedString pwd1 = new EncryptedString("pwd");
 
-		User userObject1 = new User("Dennis", "Ritchie");
+		User userObject1 = new User("Dennis", "Ritchie", pwd1);
 		SecurityContext ctx1 = new SecurityContext(userObject1);
 
-		ctx.login(pwd);
+		ctx.login(pwd, userinfo);
 		assertTrue(ctx.getState() instanceof LoggedIn);
 
 		// Checking if user2 is logged out
 		assertTrue(ctx1.getState() instanceof LoggedOut);
 
-		ctx1.login(pwd1);
+		ctx1.login(pwd1, userinfo);
 		assertTrue(ctx1.getState() instanceof LoggedIn);
 
 		ctx1.logout();
@@ -71,9 +71,21 @@ public class SecurityContextTest {
 
 	@Test
 	public void checkActiveLoginSession() throws Exception {
-		ctx.login(pwd);
+		ctx.login(pwd, userinfo);
 		assertTrue(ctx.isActive());
 
+	}
+
+	@Test
+	public void loginfail() {
+		EncryptedString falsePwd = new EncryptedString("TEST");
+		try {
+			ctx.login(falsePwd, userinfo);
+		} catch (Exception e) {
+			String expected = "Invalid login";
+
+			assertEquals(expected, e.getMessage());
+		}
 	}
 
 }

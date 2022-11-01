@@ -30,8 +30,8 @@ public class SecurityContext {
 		state = newState;
 	}
 
-	public void login(EncryptedString pwd) throws AuthenticationException {
-		state.login(pwd, this);
+	public void login(EncryptedString pwd, User user) throws AuthenticationException {
+		state.login(pwd, this, user);
 		last_login.addFirst(LocalDateTime.now());
 	}
 
