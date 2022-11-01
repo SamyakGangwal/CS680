@@ -72,7 +72,6 @@ public class SecurityContextTest {
 	@Test
 	public void checkActiveLoginSession() throws Exception {
 		ctx.login(pwd);
-
 		assertTrue(ctx.isActive());
 
 	}
