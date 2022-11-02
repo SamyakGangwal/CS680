@@ -7,7 +7,7 @@ import edu.umb.cs680.hw06.modelxyz.PrintJobExecutor;
 import edu.umb.cs680.hw06.printingframework.PrintJob;
 
 public class Main {
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		String test = "TEST";
 		PrintJob job = new PrintJob(test);
 

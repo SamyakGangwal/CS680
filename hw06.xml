@@ -4,7 +4,7 @@
 
      on a shell. 
 -->
-<project name="FileSystem" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="PrintJobExecutor" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
@@ -36,12 +36,12 @@
 	<target name="compile" depends="resolve">
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw06/*/*.java" />
+			<!-- <include name="edu/umb/cs680/hw06/*.java" /> -->
 			<!-- include name="edu/umb/cs680/hw06/*.java"/-->
 		</javac>
 		<javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw06/*/*.java" />
+			<!-- <include name="edu/umb/cs680/hw06/*/*.java" /> -->
 		</javac>
 	</target>
 
