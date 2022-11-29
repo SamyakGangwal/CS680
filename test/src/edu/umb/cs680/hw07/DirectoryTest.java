@@ -107,4 +107,16 @@ public class DirectoryTest {
 
 		assertEquals(700, root.getTotalSize());
 	}
+
+	@Test
+	public void DirectorySizeZero() {
+		Directory root = fs.getRootDirs().getFirst();
+
+		assertEquals(0, root.getSize());
+	}
+
+	@AfterAll
+	public static void cleanUp() {
+		fs.getRootDirs().clear();
+	}
 }

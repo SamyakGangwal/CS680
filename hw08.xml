@@ -4,7 +4,7 @@
 
      on a shell. 
 -->
-<project name="FSElement" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="Link" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
@@ -36,12 +36,12 @@
 	<target name="compile" depends="resolve">
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw07/*.java" />
-			<!-- include name="edu/umb/cs680/hw07/*.java"/-->
+			<include name="edu/umb/cs680/hw08/*.java" />
+			<!-- include name="edu/umb/cs680/hw08/*.java"/-->
 		</javac>
 		<javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw07/*.java" />
+			<include name="edu/umb/cs680/hw08/*.java" />
 		</javac>
 	</target>
 
@@ -50,23 +50,22 @@
 			<classpath refid="classpath" />
 			<testclasses outputdir="test/reports">
 				<fileset dir="${test.bin}">
-					<include name="edu/umb/cs680/hw07/*Test.class" />
+					<include name="edu/umb/cs680/hw08/*Test.class" />
 				</fileset>
-				<listener type="legacy-brief" sendSysOut="true" sendSysErr="true" />
-				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true" />
-				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true" />
+				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true" loglevel="verbose"/>
+				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true" loglevel="verbose"/>
 			</testclasses>
 		</junitlauncher>
 	</target>
 
 	<target name="run" depends="test">
-		<java classname="edu.umb.cs680.hw07.FileSystem" classpathref="classpath" fork="true" />
+		<java classname="edu.umb.cs680.hw08.Main" classpathref="classpath" fork="true" />
 	</target>
 
 	<target name="clean" depends="run">
 		<delete includeemptydirs="true">
-			<fileset dir="${bin}/edu/umb/cs680/hw07" includes="**/*" />
-			<fileset dir="${test.bin}/edu/umb/cs680/hw07" includes="**/*" />
+			<fileset dir="${bin}/edu/umb/cs680/hw08" includes="**/*" />
+			<fileset dir="${test.bin}/edu/umb/cs680/hw08" includes="**/*" />
 		</delete>
 	</target>
 	<target name="clean-cache" description="--> clean the ivy cache (by default ~/.ivy2/cache)">

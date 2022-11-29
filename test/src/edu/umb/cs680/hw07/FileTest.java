@@ -1,7 +1,8 @@
 package edu.umb.cs680.hw07;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -40,5 +41,10 @@ public class FileTest {
 		String parent = z.getParent().getName();
 
 		assertEquals("lib", parent);
+	}
+
+	@AfterAll
+	public static void cleanUp() {
+		fs.getRootDirs().clear();
 	}
 }
