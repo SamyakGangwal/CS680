@@ -52,14 +52,14 @@
 				<fileset dir="${test.bin}">
 					<include name="edu/umb/cs680/hw08/*Test.class" />
 				</fileset>
-				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true" loglevel="verbose"/>
-				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true" loglevel="verbose"/>
+				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true"/>
+				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
 			</testclasses>
 		</junitlauncher>
 	</target>
 
 	<target name="run" depends="test">
-		<java classname="edu.umb.cs680.hw08.Main" classpathref="classpath" fork="true" />
+		<java classname="edu.umb.cs680.hw08.FileSystem" classpathref="classpath" fork="true" />
 	</target>
 
 	<target name="clean" depends="run">
