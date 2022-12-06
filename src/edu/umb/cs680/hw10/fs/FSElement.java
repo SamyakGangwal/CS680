@@ -3,7 +3,6 @@ package edu.umb.cs680.hw10.fs;
 import java.time.LocalDateTime;
 import javax.security.sasl.AuthenticationException;
 import edu.umb.cs680.hw10.fs.SecurityContext;
-import edu.umb.cs680.hw10.fs.util.FSVisitor;
 
 public abstract class FSElement {
 	private int size;

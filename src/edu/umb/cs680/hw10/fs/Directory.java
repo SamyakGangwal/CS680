@@ -2,7 +2,6 @@ package edu.umb.cs680.hw10.fs;
 
 import java.util.LinkedList;
 import javax.security.sasl.AuthenticationException;
-import edu.umb.cs680.hw10.fs.util.FSVisitor;
 
 public class Directory extends FSElement {
 	LinkedList<FSElement> children = new LinkedList<>();

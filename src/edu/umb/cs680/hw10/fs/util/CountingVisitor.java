@@ -1,6 +1,7 @@
 package edu.umb.cs680.hw10.fs.util;
 
 import edu.umb.cs680.hw10.fs.Directory;
+import edu.umb.cs680.hw10.fs.FSVisitor;
 import edu.umb.cs680.hw10.fs.File;
 import edu.umb.cs680.hw10.fs.Link;
 

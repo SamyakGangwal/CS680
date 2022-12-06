@@ -1,7 +1,5 @@
 package edu.umb.cs680.hw10.fs;
 
-import edu.umb.cs680.hw10.fs.util.FSVisitor;
-
 public class Link extends FSElement{
 	private FSElement target;
 

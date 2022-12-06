@@ -2,6 +2,7 @@ package edu.umb.cs680.hw09.fs.util;
 
 import java.util.LinkedList;
 import edu.umb.cs680.hw09.fs.Directory;
+import edu.umb.cs680.hw09.fs.FSVisitor;
 import edu.umb.cs680.hw09.fs.File;
 import edu.umb.cs680.hw09.fs.Link;
 
