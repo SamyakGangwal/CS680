@@ -4,7 +4,7 @@
 
      on a shell. 
 -->
-<project name="Distance" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="FileSystemSort" basedir="." default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
@@ -37,12 +37,12 @@
 	<target name="compile" depends="resolve">
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw13/*.java" />
-			<!-- include name="edu/umb/cs680/hw13/distance/*.java"/-->
+			<include name="edu/umb/cs680/hw13/fs/*.java" />
+			<!-- include name="edu/umb/cs680/hw13/fs/*.java"/-->
 		</javac>
 		<javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
 			<classpath refid="classpath" />
-			<include name="edu/umb/cs680/hw13/*.java" />
+			<include name="edu/umb/cs680/hw13/**/*/*.java" />
 		</javac>
 	</target>
 
@@ -51,7 +51,7 @@
 			<classpath refid="classpath" />
 			<testclasses outputdir="test/reports">
 				<fileset dir="${test.bin}">
-					<include name="edu/umb/cs680/hw13/*Test.class" />
+					<include name="edu/umb/cs680/hw13/**/*/*Test.class" />
 				</fileset>
 				<listener type="legacy-plain" sendSysOut="true" sendSysErr="true"/>
 				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
@@ -60,7 +60,7 @@
 	</target>
 
 	<target name="run" depends="test">
-		<java classname="edu.umb.cs680.hw13.Car" classpathref="classpath" fork="true" />
+		<java classname="edu.umb.cs680.hw13.fs.FileSystem" classpathref="classpath" fork="true" />
 	</target>
 
 	<target name="clean" depends="run">
