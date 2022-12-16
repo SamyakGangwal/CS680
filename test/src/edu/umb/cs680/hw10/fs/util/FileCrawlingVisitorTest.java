@@ -2,6 +2,7 @@ package edu.umb.cs680.hw10.fs.util;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -72,19 +73,13 @@ public class FileCrawlingVisitorTest {
 
 			rootDir.accept(visitor, ctx);
 
-			String[] expectedFiles = {"x", "y", "a", "b", "c"};
-
-			ArrayList<String> actualFiles = new ArrayList<>();
-
-			for (int i = 0; i < visitor.getFiles().size(); i++) {
-				actualFiles.add(visitor.getFiles().get(i).getName());
-			}
-
-			assertArrayEquals(expectedFiles, actualFiles.toArray());
+			assertFalse(true);
 
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			String expected = "Invalid login";
+
+			assertEquals(expected, e.getMessage());
 		}
 	}
 

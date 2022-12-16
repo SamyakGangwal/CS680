@@ -1,5 +1,7 @@
 package edu.umb.cs680.hw10.fs;
 
+import javax.security.sasl.AuthenticationException;
+
 public class File extends FSElement {
 	public File(Directory parent, String name, int size) {
 		super(parent, name, size);
@@ -11,9 +13,13 @@ public class File extends FSElement {
 	}
 
 	@Override
-	public void accept(FSVisitor v, SecurityContext ctx) {
-		v.visit(this);
-		
+	public void accept(FSVisitor v, SecurityContext ctx) throws AuthenticationException {
+		if (ctx.isActive()) {
+			v.visit(this);
+		} else {
+			throw new AuthenticationException("Invalid login");
+		}
+
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package edu.umb.cs680.hw13.fs;
+package edu.umb.cs680.hw15.fs;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -125,7 +125,9 @@ public class DirectoryTest {
 		expected.add("e");
 		expected.add("home");
 
-		LinkedList<FSElement> actual = rootdir.getChildren(new AlphabeticalComparator());
+		LinkedList<FSElement> actual = rootdir.getChildren((FSElement fs1, FSElement fs2) -> {
+			return fs1.getName().compareTo(fs2.getName());
+		});
 
 		ArrayList<String> actualList = new ArrayList<>();
 
@@ -148,7 +150,9 @@ public class DirectoryTest {
 		expected.add("bin");
 		expected.add("apps");
 
-		LinkedList<FSElement> actual = rootdir.getChildren(new ReverseAlphabeticalComparator());
+		LinkedList<FSElement> actual = rootdir.getChildren((FSElement fs1, FSElement fs2) -> {
+			return fs2.getName().compareTo(fs1.getName());
+		});
 
 		ArrayList<String> actualList = new ArrayList<>();
 
@@ -171,7 +175,9 @@ public class DirectoryTest {
 		expected.add("e");
 		expected.add("home");
 
-		LinkedList<FSElement> actual = rootdir.getChildren(new SizeComparator());
+		LinkedList<FSElement> actual = rootdir.getChildren((FSElement fs1, FSElement fs2) -> {
+			return fs1.getSize() - fs2.getSize();
+		});
 
 		ArrayList<String> actualList = new ArrayList<>();
 
@@ -194,7 +200,9 @@ public class DirectoryTest {
 		expected.add("d");
 		expected.add("e");
 
-		LinkedList<FSElement> actual = rootdir.getChildren(new TimeStampComparator());
+		LinkedList<FSElement> actual = rootdir.getChildren((FSElement fs1, FSElement fs2) -> {
+			return fs1.getCreationTime().compareTo(fs2.getCreationTime());
+		});
 
 		ArrayList<String> actualList = new ArrayList<>();
 
@@ -214,7 +222,9 @@ public class DirectoryTest {
 		String[] actualSubDirectories = new String[root.getSubDirectories().size()];
 
 		for (int i = 0; i < root.getSubDirectories().size(); i++) {
-			actualSubDirectories[i] = root.getSubDirectories(new AlphabeticalComparator()).get(i).getName();
+			actualSubDirectories[i] = root.getSubDirectories((FSElement fs1, FSElement fs2) -> {
+				return fs1.getName().compareTo(fs2.getName());
+			}).get(i).getName();
 		}
 
 		assertArrayEquals(subChildren, actualSubDirectories);
@@ -229,7 +239,10 @@ public class DirectoryTest {
 		String[] actualSubDirectories = new String[root.getSubDirectories().size()];
 
 		for (int i = 0; i < root.getSubDirectories().size(); i++) {
-			actualSubDirectories[i] = root.getSubDirectories(new ReverseAlphabeticalComparator()).get(i).getName();
+			actualSubDirectories[i] =
+					root.getSubDirectories((FSElement fs1, FSElement fs2) -> {
+			return fs2.getName().compareTo(fs1.getName());
+		}).get(i).getName();
 		}
 
 		assertArrayEquals(subChildren, actualSubDirectories);
@@ -244,7 +257,9 @@ public class DirectoryTest {
 		String[] actualSubDirectories = new String[root.getSubDirectories().size()];
 
 		for (int i = 0; i < root.getSubDirectories().size(); i++) {
-			actualSubDirectories[i] = root.getSubDirectories(new SizeComparator()).get(i).getName();
+			actualSubDirectories[i] = root.getSubDirectories((FSElement fs1, FSElement fs2) -> {
+				return fs1.getSize() - fs2.getSize();
+			}).get(i).getName();
 		}
 
 		assertArrayEquals(subChildren, actualSubDirectories);
@@ -259,7 +274,10 @@ public class DirectoryTest {
 		String[] actualSubDirectories = new String[root.getSubDirectories().size()];
 
 		for (int i = 0; i < root.getSubDirectories().size(); i++) {
-			actualSubDirectories[i] = root.getSubDirectories(new TimeStampComparator()).get(i).getName();
+			actualSubDirectories[i] =
+					root.getSubDirectories((FSElement fs1, FSElement fs2) -> {
+						return fs1.getCreationTime().compareTo(fs2.getCreationTime());
+					}).get(i).getName();
 		}
 
 		assertArrayEquals(subChildren, actualSubDirectories);
@@ -273,7 +291,9 @@ public class DirectoryTest {
 
 		String filename = "x";
 
-		String actual = apps.getFiles(new AlphabeticalComparator()).get(0).getName();
+		String actual = apps.getFiles((FSElement fs1, FSElement fs2) -> {
+			return fs1.getName().compareTo(fs2.getName());
+		}).get(0).getName();
 
 		assertEquals(filename, actual);
 	}
@@ -286,7 +306,9 @@ public class DirectoryTest {
 
 		String filename = "x";
 
-		String actual = apps.getFiles(new ReverseAlphabeticalComparator()).get(0).getName();
+		String actual = apps.getFiles((FSElement fs1, FSElement fs2) -> {
+			return fs2.getName().compareTo(fs1.getName());
+		}).get(0).getName();
 
 		assertEquals(filename, actual);
 	}
@@ -299,7 +321,9 @@ public class DirectoryTest {
 
 		String filename = "x";
 
-		String actual = apps.getFiles(new SizeComparator()).get(0).getName();
+		String actual = apps.getFiles((FSElement fs1, FSElement fs2) -> {
+			return fs1.getSize() - fs2.getSize();
+		}).get(0).getName();
 
 		assertEquals(filename, actual);
 	}
@@ -312,7 +336,9 @@ public class DirectoryTest {
 
 		String filename = "x";
 
-		String actual = apps.getFiles(new TimeStampComparator()).get(0).getName();
+		String actual = apps.getFiles((FSElement fs1, FSElement fs2) -> {
+			return fs1.getCreationTime().compareTo(fs2.getCreationTime());
+		}).get(0).getName();
 
 		assertEquals(filename, actual);
 	}

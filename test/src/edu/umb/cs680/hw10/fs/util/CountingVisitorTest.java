@@ -9,7 +9,6 @@ import edu.umb.cs680.hw10.fs.Directory;
 import edu.umb.cs680.hw10.fs.EncryptedString;
 import edu.umb.cs680.hw10.fs.FileSystem;
 import edu.umb.cs680.hw10.fs.Fixture;
-import edu.umb.cs680.hw10.fs.LoggedIn;
 import edu.umb.cs680.hw10.fs.SecurityContext;
 import edu.umb.cs680.hw10.fs.User;
 

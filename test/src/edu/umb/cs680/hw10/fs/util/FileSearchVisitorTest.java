@@ -1,7 +1,7 @@
 package edu.umb.cs680.hw10.fs.util;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -82,7 +82,7 @@ public class FileSearchVisitorTest {
 			Directory rootDir = fs.getRootDirs().getFirst();
 			FileSearchVisitor visitor = new FileSearchVisitor("xyz");
 			rootDir.accept(visitor, ctx);
-			assertEquals(0, visitor.getFoundFiles().size());
+			assertFalse(true);
 
 
 		} catch (Exception e) {
