@@ -1,6 +1,6 @@
 package edu.umb.cs680.hw17;
 
-public class LineChartObserver implements Observer<StockEvent> {
+public class LineChartObserver implements Observer {
 	private StockEvent s;
 
 	public StockEvent getS() {
@@ -8,7 +8,7 @@ public class LineChartObserver implements Observer<StockEvent> {
 	}
 
 	@Override
-	public void update(Observable sender, StockEvent event) {
+	public void update(Observable sender, Object event) {
 		if (sender instanceof StockQuoteObservable) {
 			StockEvent t = new StockEvent((((StockEvent) event).getTicker()),
 					((StockEvent) event).getQuote());
